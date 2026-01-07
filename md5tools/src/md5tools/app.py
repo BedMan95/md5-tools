@@ -111,7 +111,7 @@ class MD5Tools(App):
                 background_color="#f3f4f6",
                 font_family="monospace",
                 width=380,
-                height=100,
+                height=300,
                 text_align="left"
             )
         )
