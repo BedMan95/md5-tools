@@ -85,7 +85,7 @@ async def main_page():
                 ui.label('MD5 Hash result:').classes('text-base font-medium mb-2')
                 
                 result_label = ui.label('—').classes(
-                    'font-mono text-xl break-all min-h-[3rem] p-3 bg-gray-50 dark:bg-gray-800 rounded border'
+                    'font-mono text-xl break-all min-h-[3rem] p-3 bg-gray-50 dark:bg-gray-800 rounded'
                 )
 
                 async def do_hash():
@@ -123,13 +123,13 @@ async def main_page():
                 result_container = ui.markdown('Ready to crack...')\
                     .classes(
                         'min-h-[160px] font-mono text-base whitespace-pre-wrap p-3 '
-                        'bg-gray-50 dark:bg-gray-800 rounded border prose prose-sm max-w-none'
+                        'bg-gray-50 dark:bg-gray-800 rounded prose prose-sm max-w-none'
                     )
 
                 async def start_crack():
                     h = hash_input.value.strip().lower()
                     if len(h) != 32 or not all(c in '0123456789abcdef' for c in h):
-                        result_container.text = '**Invalid MD5 format!**\nMust be exactly 32 hexadecimal characters.'
+                        result_container.content = '**Invalid MD5 format!**\nMust be exactly 32 hexadecimal characters.'
                         result_container.classes(replace='text-red-600')
                         return
                         
@@ -139,7 +139,7 @@ async def main_page():
                         result_container.content = f'**FOUND!**\n\n**Plaintext:** {plain}\n\n**MD5:** {h}'
                         result_container.classes(replace='text-green-700 font-bold')
                     else:
-                        result_container.text = (
+                        result_container.content = (
                             '**Not found** in available public lookup services.\n\n'
                             'Note (2026):\n'
                             '• Most free online MD5 databases are dead or blocked\n'
