@@ -1,0 +1,4 @@
+requests
+nicegui
+asyncio
+aiohttp
