@@ -232,4 +232,4 @@ class MD5Tools(App):
 
 
 def main():
-    return MD5Tools("MD5 Tools", "org.example.md5tools")
+    return MD5Tools("MD5 Tools", "com.fornubi.md5tools")
