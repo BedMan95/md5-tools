@@ -19,15 +19,16 @@ def cheap_md5_lookup(hash_value: str) -> str | None:
             r = requests.get(url, timeout=6, headers={"User-Agent": "Mozilla/5.0"})
             sleep(1.2) 
 
-            if "Not found" in r.text or "No match" in r.text:
+            if not r.text or ("Not found" in r.text or "No match" in r.text or "could not" in r.text.lower()):
                 continue
 
             if "gromweb" in url:
-                if "string" in r.text.lower():
+                if "/?string=" in r.text.lower():
                     start = r.text.find('The MD5 hash') + 100
                     end = r.text.find("</p>", start)
                     string = r.text[start:end].strip().strip('"').strip("'")
-                    return string.split('/?string=')[-1].split('"')[0].strip()
+                    parse = string.split('/?string=')[-1].split('"')[0].strip()
+                    return parse.replace("%20", " ")
             if "nitrxgen" in url and ".txt" in url:
                 return r.text 
             else:
@@ -68,7 +69,7 @@ def main():
                 print("String kosong tidak diizinkan!\n")
                 continue
             result = md5_hash(text)
-            print(f"\nMD5( {text} ) = \033[92m{result}\033[0m\n")
+            print(f"\nMD5({text}) = \033[92m{result}\033[0m\n")
 
         elif choice == '2':
             h = input("Masukkan MD5 hash (32 hex chars): ").strip()
