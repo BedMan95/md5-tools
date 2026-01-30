@@ -2,5 +2,5 @@ requests
 nicegui
 asyncio
 aiohttp
-toga
+# toga
 kivy
